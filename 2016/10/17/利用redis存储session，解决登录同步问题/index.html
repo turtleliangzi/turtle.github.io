@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+<head>
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Turtle</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <!--在这里倒入jquery 方便处理部分页面的jquery-->
+  <script src="http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+	
+  <header class="site-header navfixed-false">
+
+  <div class="container">
+      <h1><a href="/" title="Turtle"><span class="octicon octicon-mark-github"></span> Turtle</a></h1>
+      <nav class="site-header-nav" role="navigation">
+        
+              
+              <a href="/"  class=" site-header-nav-item hvr-underline-from-center" title="Home">Home</a>
+        
+              
+              <a href="https://github.com/turtleliangzi" target="target" class=" site-header-nav-item hvr-underline-from-center" title="Github">Github</a>
+        
+              
+              <a href="http://book.turtletl.com" target="target" class=" site-header-nav-item hvr-underline-from-center" title="Gitbook">Gitbook</a>
+        
+              
+              <a href="/bookmark/"  class=" site-header-nav-item hvr-underline-from-center" title="Bookmark">Bookmark</a>
+        
+              
+              <a href="/open-source/"  class=" site-header-nav-item hvr-underline-from-center" title="Opensource">Opensource</a>
+        
+              
+              <a href="/about/"  class=" site-header-nav-item hvr-underline-from-center" title="About">About</a>
+        
+      </nav>
+  </div>
+</header>
+
+	
+    <section class="collection-head geopattern" data-pattern-id="利用redis存储session，解决登录同步问题" >
+
+    <div class="container">
+        <div class="collection-title">
+            <h1 class="collection-header">利用redis存储session，解决登录同步问题</h1>
+            <div class="collection-info">
+             
+                <span class="meta-info">
+                    
+                            <span class="octicon octicon-calendar"></span>
+                            <time datetime="2016-10-17T10:29:09.000Z" itemprop="datePublished">2016-10-17</time>
+                    
+                </span>
+             
+            </div>
+        </div>
+    </div>
+</section>
+	
+
+    <section class="container">
+
+    <div class="columns">
+        <div class="column three-fourths" >
+            <article class="article-content article-entry">
+                <p>##一、php session存储方式<br>在php中，存储session可以使用files user memcached redis，对于小型单一网站可以直接使用files的方式存储session。使用缓存数据库存储session的好处是较之文件存储方式，在大用户量的情况下速度更快、性能更优。而且如果做分布式系统的话，使用数据库存储是很好的方式。<br>所以，如果使用数据库存储session，memecached和redis到底那种更好。<br><a id="more"></a></p>
+<p>##二、redis和memcached的比较<br>1、redis不仅仅支持简单的k/v类型的数据，同时还提供list、set、zset、hash等数据结构的存储;<br>2、redis支持数据的备份，即master-slave模式的数据备份;<br>3、redis支持数据的持久化，可以将内存中的数据保存到磁盘中，重启的时候可以再次加载进行使用;<br>redis和memcached都是高性能的分布式缓存服务器，通过上述比较，考虑到如果重启服务器，memcached中的数据都会丢失，会影响用户的体验，所以使用redis存储session是比较好的方案。</p>
+<p>##三、redis存储session的php实现<br>在我的上篇博客中，已经介绍了怎么安装redis服务器及phpredis扩展，具体请参考：<a href="http://blog.csdn.net/turtleo/article/details/49934497" target="_blank" rel="external">http://blog.csdn.net/turtleo/article/details/49934497</a><br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line">ini_set(<span class="string">'session.gc_maxlifetime'</span>, <span class="number">3600</span>);</div><div class="line">ini_set(<span class="string">'session.save_handler'</span>, <span class="string">"redis"</span>);</div><div class="line">ini_set(<span class="string">"session.save_path"</span>, <span class="string">"tcp://127.0.0.1:6379"</span>);</div><div class="line">session_start();</div><div class="line">$_SESSION[<span class="string">'uid'</span>] = <span class="string">"2"</span>;</div><div class="line">$_SESSION[<span class="string">'username'</span>] = <span class="string">"turtle"</span>;</div><div class="line"></div><div class="line">$redis = <span class="keyword">new</span> Redis();</div><div class="line">$redis-&gt;connect(<span class="string">'127.0.0.1'</span>, <span class="number">6379</span>);</div><div class="line">$user = $redis-&gt;get(<span class="string">'PHPREDIS_SESSION:'</span>.session_id()).<span class="string">'&lt;/br&gt;'</span>;</div><div class="line"><span class="keyword">echo</span> $user;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+<p>如果在配置文件中/etc/redis/6379.conf中开启了requirepass，这使用如下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">ini_set(&apos;session.gc_maxlifetime&apos;, 3600);</div><div class="line">ini_set(&apos;session.save_handler&apos;, &quot;redis&quot;);</div><div class="line">ini_set(&quot;session.save_path&quot;, &quot;tcp://127.0.0.1:6379?auth=password&quot;);</div><div class="line">session_start();</div><div class="line">$_SESSION[&apos;uid&apos;] = &quot;2&quot;;</div><div class="line">$_SESSION[&apos;username&apos;] = &quot;turtle&quot;;</div><div class="line"></div><div class="line">$redis = new Redis();</div><div class="line">$redis-&gt;connect(&apos;127.0.0.1&apos;, 6379);</div><div class="line">$redis-&gt;auth(&apos;turtletl.com&apos;);</div><div class="line">$user =  $redis-&gt;get(&apos;PHPREDIS_SESSION:&apos;.session_id()).&apos;&lt;/br&gt;&apos;;</div><div class="line">echo $user;</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<p>可以进行如下配置开启requirepass：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/redis/6379.conf</div></pre></td></tr></table></figure></p>
+<p>具体配置文件依情况而定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">requirepass 密码</div></pre></td></tr></table></figure></p>
+<p>重启redis服务器。</p>
+
+            </article>
+            
+                <div class="share">
+                    <!--开启分享-->
+<div class="share-component"></div>
+
+<script src="/js/share.min.js"></script>
+                </div>    
+            
+            
+                <div class="comments">
+                    
+                        
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    /**
+    * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+
+    s.src = '//yumemor.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+                    
+
+                </div>
+            
+        </div>
+        <div class="column one-fourth">
+            
+                <h3>Post Directory</h3>
+
+<div id="post-directory-module">
+	<section class="post-directory">
+		<p><strong class="toc-title">文章目录</strong></p>
+		
+	</section>
+</div>
+            
+        </div>
+       
+    </div>
+</section>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+                © 2016
+                <span title="yumemor">yumemor</span>
+                <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+            </li>
+        </ul>
+
+        <a href="https://github.com/turtleliangzi/turtleliangzi.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+        </a>
+
+        <ul class="site-footer-links mobile-hidden">
+            
+             
+              
+              <li>
+                <a href="/"  title="Home">Home</a>
+              </li>
+            
+              
+              <li>
+                <a href="https://github.com/turtleliangzi" target="target" title="Github">Github</a>
+              </li>
+            
+              
+              <li>
+                <a href="http://book.turtletl.com" target="target" title="Gitbook">Gitbook</a>
+              </li>
+            
+              
+              <li>
+                <a href="/bookmark/"  title="Bookmark">Bookmark</a>
+              </li>
+            
+              
+              <li>
+                <a href="/open-source/"  title="Opensource">Opensource</a>
+              </li>
+            
+              
+              <li>
+                <a href="/about/"  title="About">About</a>
+              </li>
+            
+
+        </ul>
+
+    </div>
+</footer>
+
+		
+		<script src="/js/typer.js"></script>
+
+		<script src="/js/geopattern.js"></script>
+
+		<script src="/js/index.js"></script>
+
+		 <script src="/js/popular_repo.js"></script> 
+
+	</body>
+</html>

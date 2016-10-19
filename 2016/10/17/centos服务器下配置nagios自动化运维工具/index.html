@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+<head>
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Turtle</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <!--在这里倒入jquery 方便处理部分页面的jquery-->
+  <script src="http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+	
+  <header class="site-header navfixed-false">
+
+  <div class="container">
+      <h1><a href="/" title="Turtle"><span class="octicon octicon-mark-github"></span> Turtle</a></h1>
+      <nav class="site-header-nav" role="navigation">
+        
+              
+              <a href="/"  class=" site-header-nav-item hvr-underline-from-center" title="Home">Home</a>
+        
+              
+              <a href="https://github.com/turtleliangzi" target="target" class=" site-header-nav-item hvr-underline-from-center" title="Github">Github</a>
+        
+              
+              <a href="http://book.turtletl.com" target="target" class=" site-header-nav-item hvr-underline-from-center" title="Gitbook">Gitbook</a>
+        
+              
+              <a href="/bookmark/"  class=" site-header-nav-item hvr-underline-from-center" title="Bookmark">Bookmark</a>
+        
+              
+              <a href="/open-source/"  class=" site-header-nav-item hvr-underline-from-center" title="Opensource">Opensource</a>
+        
+              
+              <a href="/about/"  class=" site-header-nav-item hvr-underline-from-center" title="About">About</a>
+        
+      </nav>
+  </div>
+</header>
+
+	
+    <section class="collection-head geopattern" data-pattern-id="centos服务器下配置nagios自动化运维工具" >
+
+    <div class="container">
+        <div class="collection-title">
+            <h1 class="collection-header">centos服务器下配置nagios自动化运维工具</h1>
+            <div class="collection-info">
+             
+                <span class="meta-info">
+                    
+                            <span class="octicon octicon-calendar"></span>
+                            <time datetime="2016-10-17T10:25:48.000Z" itemprop="datePublished">2016-10-17</time>
+                    
+                </span>
+             
+            </div>
+        </div>
+    </div>
+</section>
+	
+
+    <section class="container">
+
+    <div class="columns">
+        <div class="column three-fourths" >
+            <article class="article-content article-entry">
+                <p>Nagios是一款Linux上成熟的监视系统运行状态和网络信息的开源IT基础设施监视系统。Nagios能监视所指定的本地或远程主机服务，同时提供异常通知、事件处理等功能。与商业IT管理系统，如IBM Tivoli、HP OpenView/Operations等相比，Nagios具有成本低廉、结构简单、可维护性强等诸多优点，越来越受IT运维人员和系统管理员的青睐。<br><a id="more"></a><br>本博客是基于Centos、apache环境搭建Nagios的。</p>
+<p>##一、安装Nagios<br><strong><em>1.安装前的准备</em></strong><br>(1)创建Nagios用户和用户组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">useradd -s /sbin/nologin nagios</div><div class="line">mkdir /usr/local/nagios</div><div class="line">chown -R nagios.nagios /usr/local/nagios</div></pre></td></tr></table></figure></p>
+<p>(2)开启系统的sendmail服务<br>在Nagios监控服务器上开启sendmail服务的作用是让Nagios在检测到故障时可以发送报警邮件。<br>可以按如下需求配置sendmail服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vim /etc/mail.rc</div><div class="line">set from=fromUser smtp=smtp服务器 smtp-auth-user=用户名 smtp-auth-password=密码 smtp-auth=login</div></pre></td></tr></table></figure></p>
+<p><strong><em>2.安装Nagios</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">tar xvzf nagios-4.1.1.tar.gz</div><div class="line">cd nagios</div><div class="line">./configure --prefix=/usr/local/nagios</div><div class="line">make all</div><div class="line">make install</div><div class="line">make install-init</div><div class="line">make install-commandmode</div><div class="line">make install-config</div><div class="line">chkconfig --add nagios</div><div class="line">chkconfig --level 35 nagios on</div><div class="line">chkconfig --list nagios</div></pre></td></tr></table></figure></p>
+<p><strong><em>3.安装Nagios插件</em></strong><br>Nagios提供的各种功能基本上是通过插件来完成的，而Nagios核心只提供了很少的监控功能。Nagios插件可以在www.nagios.org下载。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">tar xvzf nagios-plugins-2.1.1.tar.gz</div><div class="line">cd nagios-plugins-2.1.1</div><div class="line">./configure --prefix=/usr/local/nagios</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure></p>
+<p><strong><em>4.配置apache</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/httpd/conf/httpd.conf</div></pre></td></tr></table></figure></p>
+<p>修改用户和用户组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">User nagios</div><div class="line">Group nagios</div></pre></td></tr></table></figure></p>
+<p>找到<br>DirectoryIndex index.html<br>修改为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DirectoryIndex index.html index.php</div><div class="line">AddType application/x-httpd-php .php</div></pre></td></tr></table></figure></p>
+<p>增加验证配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">#setting for nagios</div><div class="line">ScriptAlias /nagios/cgi-bin &quot;/usr/local/nagios/sbin&quot;</div><div class="line">&lt;Directory &quot;/usr/local/nagios/sbin&quot;&gt;</div><div class="line">    </div><div class="line">    AuthType Basic</div><div class="line">    Options ExecCGI</div><div class="line">    AllowOverride None</div><div class="line">    Order allow,deny</div><div class="line">    Allow from all</div><div class="line">    AuthName &quot;nagios Access&quot;</div><div class="line">    AuthUserFile /usr/local/nagios/etc/htpasswd</div><div class="line">    Require valid-user</div><div class="line">&lt;/Directory&gt;</div><div class="line">Alias /nagios &quot;/usr/local/nagios/share&quot;</div><div class="line">&lt;Directory &quot;/usr/local/nagios/share&quot;&gt;</div><div class="line">AuthType Basic</div><div class="line">    Options None</div><div class="line">    AllowOverride None</div><div class="line">    Order allow,deny</div><div class="line">    Allow from all</div><div class="line">    AuthName &quot;nagios Access&quot;</div><div class="line">    AuthUserFile /usr/local/nagios/etc/htpasswd</div><div class="line">    Require valid-user</div><div class="line"></div><div class="line"></div><div class="line">&lt;/Directory&gt;</div></pre></td></tr></table></figure></p>
+<p>创建Apache目录验证文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">htpasswd -c /usr/local/nagios/etc/htpasswd 用户名</div><div class="line">New password:(输入密码)</div><div class="line">Re-type new password:(确认密码)</div></pre></td></tr></table></figure></p>
+<p>重启Apache服务</p>
+<p>##二、配置Nagios<br>(1)hosts.cfg文件<br>此文件在默认情况下不存在，需要手动创建。hosts.cfg主要用来指定被监控的主机地址及相关属性信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">define host &#123;</div><div class="line"></div><div class="line">        use     linux-server</div><div class="line"></div><div class="line">        host_name       web</div><div class="line">        alias           turtletl-web</div><div class="line">        address         115.29.39.145</div><div class="line">&#125;</div><div class="line">define host &#123;</div><div class="line"></div><div class="line">        use     linux-server</div><div class="line"></div><div class="line">        host_name       turtletl</div><div class="line">        alias           turtletl.com</div><div class="line">        address         www.turtletl.com</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">define hostgroup &#123;</div><div class="line">        hostgroup_name  sa-server</div><div class="line">        alias           sa server</div><div class="line">        members         web,turtletl</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>此文件创建了115.29.39.145和turtletl.com两个远程主机和一个主机组。<br>（2）services.cfg文件<br>此文件在默认情况下也不存在，需要创建。services.cfg文件主要用于定义监控服务和主机资源。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">########################### web #################################</div><div class="line"></div><div class="line">define service &#123;</div><div class="line"></div><div class="line">        use     local-service</div><div class="line">        host_name       web</div><div class="line">        service_description     PING</div><div class="line">        check_command           check_ping!100.0,20%!500.0,60%</div><div class="line">&#125;</div><div class="line"></div><div class="line">define service &#123;</div><div class="line"></div><div class="line">        use     local-service</div><div class="line">        host_name       web</div><div class="line">        service_description     SSH</div><div class="line">        check_command           check_ssh</div><div class="line">&#125;</div><div class="line"></div><div class="line">define service &#123;</div><div class="line"></div><div class="line">        use     local-service</div><div class="line">        host_name       web</div><div class="line">        service_description     SSHD</div><div class="line">        check_command           check_tcp!22</div><div class="line">&#125;</div><div class="line"></div><div class="line">define service &#123;</div><div class="line"></div><div class="line">        use     local-service</div><div class="line">        host_name       web</div><div class="line">        service_description     http</div><div class="line">        check_command           check_http</div><div class="line">&#125;</div><div class="line">########################### turtletl ############################</div><div class="line"></div><div class="line">define service &#123;</div><div class="line"></div><div class="line">        use     local-service</div><div class="line">        host_name       turtletl</div><div class="line">        service_description     PING</div><div class="line">        check_command           check_ping!100.0,20%!500.0,60%</div><div class="line">&#125;</div><div class="line"></div><div class="line">define service &#123;</div><div class="line"></div><div class="line">        use     local-service</div><div class="line">        host_name       turtletl</div><div class="line">        service_description     SSH</div><div class="line">        check_command           check_ssh</div><div class="line">&#125;</div><div class="line"></div><div class="line">define service &#123;</div><div class="line"></div><div class="line">        use     local-service</div><div class="line">        host_name       turtletl</div><div class="line">        service_description     SSHD</div><div class="line">        check_command           check_tcp!22</div><div class="line">&#125;</div><div class="line"></div><div class="line">define service &#123;</div><div class="line"></div><div class="line">        use     local-service</div><div class="line">        host_name       turtletl</div><div class="line">        service_description     http</div><div class="line">        check_command           check_http</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里对这两个主机设置了4个监控服务。<br>（3）contacts.cfg文件<br>contacts.cfg是一个定义联系人和联系人组的配置文件，当监护的主机或服务出现故障时，Nagios会通过指定的通知将信息发送给指定的联系人或使用者。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">define contact&#123;</div><div class="line">        contact_name  turtle ; Short name of user</div><div class="line">        use    generic-contact ; Inherit default values from generic-contact template (defined above)</div><div class="line">        alias  turtle Admin; Full name of user</div><div class="line"></div><div class="line">        email  邮箱   ; &lt;&lt;***** CHANGE THIS TO YOUR EMAIL ADDRESS ******&gt;&gt;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># CONTACT GROUPS</div><div class="line"># We only have one contact in this simple configuration file, so there is</div><div class="line"># no need to create more than one contact group.</div><div class="line"></div><div class="line">define contactgroup&#123;</div><div class="line">        contactgroup_name       admins</div><div class="line">        alias                   Nagios Administrators</div><div class="line">        members                 turtle</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>(4)cgi.cfg文件<br>在cgi.cfg文件中添加此用户的执行权限就可以。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">default_user_name=turtle</div><div class="line">authorized_for_system_information=turtle</div><div class="line">authorized_for_configuration_information=turtle</div><div class="line">authorized_for_system_commands=turtle</div><div class="line">authorized_for_all_services=turtle</div><div class="line">authorized_for_all_hosts=turtle</div><div class="line">authorized_for_all_service_commands=turtle</div><div class="line">authorized_for_all_host_commands=turtle</div></pre></td></tr></table></figure></p>
+<p>(6)nagios.cfg文件<br>将上面添加的文件在nagios.cfg文件中配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cfg_file=/usr/local/nagios/etc/objects/hosts.cfg</div><div class="line">cfg_file=/usr/local/nagios/etc/objects/services.cfg</div><div class="line">cfg_file=/usr/local/nagios/etc/objects/commands.cfg</div><div class="line">cfg_file=/usr/local/nagios/etc/objects/contacts.cfg</div><div class="line">cfg_file=/usr/local/nagios/etc/objects/timeperiods.cfg</div><div class="line">cfg_file=/usr/local/nagios/etc/objects/templates.cfg</div></pre></td></tr></table></figure></p>
+<p>##三、Nagios的运行和维护<br><strong><em>1.验证Nagios配置文件的正确性</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg</div></pre></td></tr></table></figure></p>
+<p><strong><em>2.启动与停止Nagios</em></strong><br>(1）启动Nagios<br>/usr/local/nagios/bin/nagios -d /usr/local/nagios/etc/nagios.cfg<br>(2）关闭nagios<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kill &lt;nagios_pid&gt;</div></pre></td></tr></table></figure></p>
+<p>(3)重启nagios<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kill -HUP &lt;nagios_pid&gt;</div></pre></td></tr></table></figure></p>
+<p>))</p>
+
+            </article>
+            
+                <div class="share">
+                    <!--开启分享-->
+<div class="share-component"></div>
+
+<script src="/js/share.min.js"></script>
+                </div>    
+            
+            
+                <div class="comments">
+                    
+                        
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    /**
+    * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+
+    s.src = '//yumemor.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+                    
+
+                </div>
+            
+        </div>
+        <div class="column one-fourth">
+            
+                <h3>Post Directory</h3>
+
+<div id="post-directory-module">
+	<section class="post-directory">
+		<p><strong class="toc-title">文章目录</strong></p>
+		
+	</section>
+</div>
+            
+        </div>
+       
+    </div>
+</section>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+                © 2016
+                <span title="yumemor">yumemor</span>
+                <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+            </li>
+        </ul>
+
+        <a href="https://github.com/turtleliangzi/turtleliangzi.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+        </a>
+
+        <ul class="site-footer-links mobile-hidden">
+            
+             
+              
+              <li>
+                <a href="/"  title="Home">Home</a>
+              </li>
+            
+              
+              <li>
+                <a href="https://github.com/turtleliangzi" target="target" title="Github">Github</a>
+              </li>
+            
+              
+              <li>
+                <a href="http://book.turtletl.com" target="target" title="Gitbook">Gitbook</a>
+              </li>
+            
+              
+              <li>
+                <a href="/bookmark/"  title="Bookmark">Bookmark</a>
+              </li>
+            
+              
+              <li>
+                <a href="/open-source/"  title="Opensource">Opensource</a>
+              </li>
+            
+              
+              <li>
+                <a href="/about/"  title="About">About</a>
+              </li>
+            
+
+        </ul>
+
+    </div>
+</footer>
+
+		
+		<script src="/js/typer.js"></script>
+
+		<script src="/js/geopattern.js"></script>
+
+		<script src="/js/index.js"></script>
+
+		 <script src="/js/popular_repo.js"></script> 
+
+	</body>
+</html>
