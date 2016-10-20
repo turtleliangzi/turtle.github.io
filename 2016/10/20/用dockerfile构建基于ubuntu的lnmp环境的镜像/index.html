@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+<head>
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Turtle</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <!--在这里倒入jquery 方便处理部分页面的jquery-->
+  <script src="http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+	
+  <header class="site-header navfixed-false">
+
+  <div class="container">
+      <h1><a href="/" title="Turtle"><span class="octicon octicon-mark-github"></span> Turtle</a></h1>
+      <nav class="site-header-nav" role="navigation">
+        
+              
+              <a href="/"  class=" site-header-nav-item hvr-underline-from-center" title="Home">Home</a>
+        
+              
+              <a href="https://github.com/turtleliangzi" target="target" class=" site-header-nav-item hvr-underline-from-center" title="Github">Github</a>
+        
+              
+              <a href="http://book.turtletl.com" target="target" class=" site-header-nav-item hvr-underline-from-center" title="Gitbook">Gitbook</a>
+        
+              
+              <a href="/bookmark/"  class=" site-header-nav-item hvr-underline-from-center" title="Bookmark">Bookmark</a>
+        
+              
+              <a href="/open-source/"  class=" site-header-nav-item hvr-underline-from-center" title="Opensource">Opensource</a>
+        
+              
+              <a href="/about/"  class=" site-header-nav-item hvr-underline-from-center" title="About">About</a>
+        
+      </nav>
+  </div>
+</header>
+
+	
+    <section class="collection-head geopattern" data-pattern-id="用dockerfile构建基于ubuntu的lnmp环境的镜像" >
+
+    <div class="container">
+        <div class="collection-title">
+            <h1 class="collection-header">用dockerfile构建基于ubuntu的lnmp环境的镜像</h1>
+            <div class="collection-info">
+             
+                <span class="meta-info">
+                    
+                            <span class="octicon octicon-calendar"></span>
+                            <time datetime="2016-10-20T06:32:45.000Z" itemprop="datePublished">2016-10-20</time>
+                    
+                </span>
+             
+            </div>
+        </div>
+    </div>
+</section>
+	
+
+    <section class="container">
+
+    <div class="columns">
+        <div class="column three-fourths" >
+            <article class="article-content article-entry">
+                <blockquote>
+<p>本文主要讲述的是如何用dockerfile构建lnmp环境的镜像，前提默认你已安装好docker</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="一、新建Dockerfile文件"><a href="#一、新建Dockerfile文件" class="headerlink" title="一、新建Dockerfile文件"></a>一、新建Dockerfile文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">FROM ubuntu:16.04</div><div class="line"></div><div class="line">MAINTAINER turtle &quot;turtle@anasit.com&quot;</div><div class="line"></div><div class="line">RUN \</div><div class="line">        apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0xcbcb082a1bb943db &amp;&amp; \</div><div class="line">        apt-get update &amp;&amp; \</div><div class="line">        apt-get install -y mariadb-server mariadb-common &amp;&amp; \</div><div class="line">        apt-get install -y php &amp;&amp; \</div><div class="line">        apt-get install -y nginx &amp;&amp; \</div><div class="line">        apt-get install -y vim </div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"># 配置nginx</div><div class="line"></div><div class="line">Copy ./default /etc/nginx/sites-available/default</div><div class="line"></div><div class="line"># 添加启动脚本</div><div class="line">ADD ./start.sh /start.sh</div><div class="line">RUN chmod 755 /start.sh</div><div class="line"></div><div class="line"></div><div class="line">CMD /start.sh &amp;&amp; tail -f</div><div class="line"></div><div class="line"># Expose ports.</div><div class="line">EXPOSE 3306</div><div class="line">EXPOSE 80</div></pre></td></tr></table></figure>
+<p>start.sh文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">## start nginx</div><div class="line">service nginx start</div><div class="line">## start mysql</div><div class="line">service mysql start</div><div class="line"></div><div class="line">## start php7.0-fpm</div><div class="line">service php7.0-fpm start</div></pre></td></tr></table></figure></p>
+<p>default文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"># You should look at the following URL&apos;s in order to grasp a solid understanding</div><div class="line"># of Nginx configuration files in order to fully unleash the power of Nginx.</div><div class="line"># http://wiki.nginx.org/Pitfalls</div><div class="line"># http://wiki.nginx.org/QuickStart</div><div class="line"># http://wiki.nginx.org/Configuration</div><div class="line">#</div><div class="line"># Generally, you will want to move this file somewhere, and start with a clean</div><div class="line">##</div><div class="line"># You should look at the following URL&apos;s in order to grasp a solid understanding</div><div class="line"># of Nginx configuration files in order to fully unleash the power of Nginx.</div><div class="line"># http://wiki.nginx.org/Pitfalls</div><div class="line"># http://wiki.nginx.org/QuickStart</div><div class="line"># http://wiki.nginx.org/Configuration</div><div class="line">#</div><div class="line"># Generally, you will want to move this file somewhere, and start with a clean</div><div class="line"># file but keep this around for reference. Or just disable in sites-enabled.</div><div class="line">#</div><div class="line"># Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.</div><div class="line">##</div><div class="line"></div><div class="line"># Default server configuration</div><div class="line">#</div><div class="line">server &#123;</div><div class="line">    listen 80 default_server;</div><div class="line">    listen [::]:80 default_server;</div><div class="line">    # SSL configuration</div><div class="line">    #   </div><div class="line">    # listen 443 ssl default_server;</div><div class="line">    # listen [::]:443 ssl default_server;</div><div class="line">    #   </div><div class="line">    # Note: You should disable gzip for SSL traffic.</div><div class="line">    # See: https://bugs.debian.org/773332</div><div class="line">    #   </div><div class="line">    # Read up on ssl_ciphers to ensure a secure configuration.</div><div class="line">    # See: https://bugs.debian.org/765782</div><div class="line">    #   </div><div class="line">    # Self signed certs generated by the ssl-cert package</div><div class="line">    # Don&apos;t use them in a production server!</div><div class="line">    #   </div><div class="line">    # include snippets/snakeoil.conf;</div><div class="line">    root /var/www/html;</div><div class="line"></div><div class="line">    # Add index.php to the list if you are using PHP</div><div class="line">    index index.php index.html index.htm index.nginx-debian.html;</div><div class="line">    server_name _;</div><div class="line">    location / &#123;</div><div class="line">        # First attempt to serve request as file, then</div><div class="line">        # as directory, then fall back to displaying a 404.</div><div class="line">        try_files $uri $uri/ =404;</div><div class="line">    &#125;</div><div class="line">    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</div><div class="line">    #</div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        include snippets/fastcgi-php.conf;</div><div class="line">        # With php7.0-cgi alone:</div><div class="line">#       fastcgi_pass 127.0.0.1:9000;</div><div class="line">        # With php7.0-fpm:</div><div class="line">        fastcgi_pass unix:/run/php/php7.0-fpm.sock;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"># deny access to .htaccess files, if Apache&apos;s document root</div><div class="line"># concurs with nginx&apos;s one</div><div class="line">#</div><div class="line">#location ~ /\.ht &#123;</div><div class="line">#       deny all;</div><div class="line">#&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"># Virtual Host configuration for example.com</div><div class="line">#</div><div class="line"># You can move that to a different file under sites-available/ and symlink that</div><div class="line"># to sites-enabled/ to enable it.</div><div class="line">#</div><div class="line">#server &#123;</div><div class="line">#       listen 80;</div><div class="line">#       listen [::]:80;</div><div class="line">#</div><div class="line">#       server_name example.com;</div><div class="line">#</div><div class="line">#       root /var/www/example.com;</div><div class="line">#       index index.html;</div><div class="line">#</div><div class="line">#       location / &#123;</div><div class="line">#               try_files $uri $uri/ =404;</div><div class="line">#       &#125;</div><div class="line">#&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="二、build-Dockerfile文件"><a href="#二、build-Dockerfile文件" class="headerlink" title="二、build Dockerfile文件"></a>二、build Dockerfile文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker build -t turtlell/lnmp:1.0 .</div></pre></td></tr></table></figure>
+<h2 id="三、运行镜像"><a href="#三、运行镜像" class="headerlink" title="三、运行镜像"></a>三、运行镜像</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -id -p 80:80 -v /var/www/html:/var/www/html turtlell/lnmp</div></pre></td></tr></table></figure>
+<h2 id="四、访问localhost"><a href="#四、访问localhost" class="headerlink" title="四、访问localhost"></a>四、访问localhost</h2><p>访问<a href="http://localhost" target="_blank" rel="external">localhost</a>，运行成功，则说明搭建成功</p>
+<p>详情请访问<a href="https://github.com/turtleliangzi/lnmp" target="_blank" rel="external">github</a></p>
+
+            </article>
+            
+                <div class="share">
+                    <!--开启分享-->
+<div class="share-component"></div>
+
+<script src="/js/share.min.js"></script>
+                </div>    
+            
+            
+                <div class="comments">
+                    
+                        
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    /**
+    * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+
+    s.src = '//yumemor.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+                    
+
+                </div>
+            
+        </div>
+        <div class="column one-fourth">
+            
+                <h3>Post Directory</h3>
+
+<div id="post-directory-module">
+	<section class="post-directory">
+		<p><strong class="toc-title">文章目录</strong></p>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、新建Dockerfile文件"><span class="toc-text">一、新建Dockerfile文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、build-Dockerfile文件"><span class="toc-text">二、build Dockerfile文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、运行镜像"><span class="toc-text">三、运行镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、访问localhost"><span class="toc-text">四、访问localhost</span></a></li></ol>
+	</section>
+</div>
+            
+        </div>
+       
+    </div>
+</section>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+                © 2016
+                <span title="yumemor">yumemor</span>
+                <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+            </li>
+        </ul>
+
+        <a href="https://github.com/turtleliangzi/turtleliangzi.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+        </a>
+
+        <ul class="site-footer-links mobile-hidden">
+            
+             
+              
+              <li>
+                <a href="/"  title="Home">Home</a>
+              </li>
+            
+              
+              <li>
+                <a href="https://github.com/turtleliangzi" target="target" title="Github">Github</a>
+              </li>
+            
+              
+              <li>
+                <a href="http://book.turtletl.com" target="target" title="Gitbook">Gitbook</a>
+              </li>
+            
+              
+              <li>
+                <a href="/bookmark/"  title="Bookmark">Bookmark</a>
+              </li>
+            
+              
+              <li>
+                <a href="/open-source/"  title="Opensource">Opensource</a>
+              </li>
+            
+              
+              <li>
+                <a href="/about/"  title="About">About</a>
+              </li>
+            
+
+        </ul>
+
+    </div>
+</footer>
+
+		
+		<script src="/js/typer.js"></script>
+
+		<script src="/js/geopattern.js"></script>
+
+		<script src="/js/index.js"></script>
+
+		 <script src="/js/popular_repo.js"></script> 
+
+	</body>
+</html>

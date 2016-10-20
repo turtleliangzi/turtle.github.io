@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+<head>
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Turtle</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <!--在这里倒入jquery 方便处理部分页面的jquery-->
+  <script src="http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+	
+  <header class="site-header navfixed-false">
+
+  <div class="container">
+      <h1><a href="/" title="Turtle"><span class="octicon octicon-mark-github"></span> Turtle</a></h1>
+      <nav class="site-header-nav" role="navigation">
+        
+              
+              <a href="/"  class=" site-header-nav-item hvr-underline-from-center" title="Home">Home</a>
+        
+              
+              <a href="https://github.com/turtleliangzi" target="target" class=" site-header-nav-item hvr-underline-from-center" title="Github">Github</a>
+        
+              
+              <a href="http://book.turtletl.com" target="target" class=" site-header-nav-item hvr-underline-from-center" title="Gitbook">Gitbook</a>
+        
+              
+              <a href="/bookmark/"  class=" site-header-nav-item hvr-underline-from-center" title="Bookmark">Bookmark</a>
+        
+              
+              <a href="/open-source/"  class=" site-header-nav-item hvr-underline-from-center" title="Opensource">Opensource</a>
+        
+              
+              <a href="/about/"  class=" site-header-nav-item hvr-underline-from-center" title="About">About</a>
+        
+      </nav>
+  </div>
+</header>
+
+	
+    <section class="collection-head geopattern" data-pattern-id="centos7 下安装scrapy" >
+
+    <div class="container">
+        <div class="collection-title">
+            <h1 class="collection-header">centos7 下安装scrapy</h1>
+            <div class="collection-info">
+             
+                <span class="meta-info">
+                    
+                            <span class="octicon octicon-calendar"></span>
+                            <time datetime="2016-10-20T06:29:01.000Z" itemprop="datePublished">2016-10-20</time>
+                    
+                </span>
+             
+            </div>
+        </div>
+    </div>
+</section>
+	
+
+    <section class="container">
+
+    <div class="columns">
+        <div class="column three-fourths" >
+            <article class="article-content article-entry">
+                <p>由于centos6下需要升级python版本，这里简单起见直接使用centos7 ，默认centos7使用的python包管理器是easy_install －－－当然也可以通过easy_install安装pip。所以使用如下命令搞定scrapy的安装：<br><a id="more"></a><br>easy_install  scrapy<br>不过安装过程可能不会像上面那么顺利，就为其还依赖一些rpm包，所以在安装前需要安装如下包：</p>
+<p>yum install libxslt-devel  libffi libffi-devel  python-devel gcc  openssl openssl-devel<br>如果不事先安装以上包，可能会遇到如下的相关报错和问题</p>
+<p>报错1：</p>
+<p>ERROR: /bin/sh: xslt-config: command not found<br><strong> make sure the development packages of libxml2 and libxslt are installed </strong><br>解决方法yum -y install libxslt-devel 。</p>
+<p>报错2：</p>
+<p>Using build configuration of libxslt 1.1.28<br>Building against libxml2/libxslt in the following directory: /usr/lib64<br>src/lxml/lxml.etree.c:85:20: fatal error: Python.h: No such file or directory</p>
+<p> #include “Python.h”<br>                    ^<br>compilation terminated.<br>Compile failed: command ‘gcc’ failed with exit status 1<br>error: Setup script exited with error: command ‘gcc’ failed with exit status 1<br>缺少python-devel包，因为Python.h文件是在python-devel包中的。直接yum安装该包即可。</p>
+<p>报错3：</p>
+<p>removing: _configtest.c _configtest.o<br>c/_cffi_backend.c:13:17: fatal error: ffi.h: No such file or directory<br> include ffi.h<br>compilation terminated.<br>error: Setup script exited with error: command ‘gcc’ failed with exit status<br>centos下的报错示还是很好的，yum list｜grep ffi相关的包，发现执行如下安装yum -y install libffi libffi-devel 。</p>
+
+            </article>
+            
+                <div class="share">
+                    <!--开启分享-->
+<div class="share-component"></div>
+
+<script src="/js/share.min.js"></script>
+                </div>    
+            
+            
+                <div class="comments">
+                    
+                        
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    /**
+    * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+
+    s.src = '//yumemor.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+                    
+
+                </div>
+            
+        </div>
+        <div class="column one-fourth">
+            
+                <h3>Post Directory</h3>
+
+<div id="post-directory-module">
+	<section class="post-directory">
+		<p><strong class="toc-title">文章目录</strong></p>
+		
+	</section>
+</div>
+            
+        </div>
+       
+    </div>
+</section>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+                © 2016
+                <span title="yumemor">yumemor</span>
+                <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+            </li>
+        </ul>
+
+        <a href="https://github.com/turtleliangzi/turtleliangzi.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+        </a>
+
+        <ul class="site-footer-links mobile-hidden">
+            
+             
+              
+              <li>
+                <a href="/"  title="Home">Home</a>
+              </li>
+            
+              
+              <li>
+                <a href="https://github.com/turtleliangzi" target="target" title="Github">Github</a>
+              </li>
+            
+              
+              <li>
+                <a href="http://book.turtletl.com" target="target" title="Gitbook">Gitbook</a>
+              </li>
+            
+              
+              <li>
+                <a href="/bookmark/"  title="Bookmark">Bookmark</a>
+              </li>
+            
+              
+              <li>
+                <a href="/open-source/"  title="Opensource">Opensource</a>
+              </li>
+            
+              
+              <li>
+                <a href="/about/"  title="About">About</a>
+              </li>
+            
+
+        </ul>
+
+    </div>
+</footer>
+
+		
+		<script src="/js/typer.js"></script>
+
+		<script src="/js/geopattern.js"></script>
+
+		<script src="/js/index.js"></script>
+
+		 <script src="/js/popular_repo.js"></script> 
+
+	</body>
+</html>

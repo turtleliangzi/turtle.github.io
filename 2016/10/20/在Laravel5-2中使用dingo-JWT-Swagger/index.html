@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+<head>
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Turtle</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <!--在这里倒入jquery 方便处理部分页面的jquery-->
+  <script src="http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+	
+  <header class="site-header navfixed-false">
+
+  <div class="container">
+      <h1><a href="/" title="Turtle"><span class="octicon octicon-mark-github"></span> Turtle</a></h1>
+      <nav class="site-header-nav" role="navigation">
+        
+              
+              <a href="/"  class=" site-header-nav-item hvr-underline-from-center" title="Home">Home</a>
+        
+              
+              <a href="https://github.com/turtleliangzi" target="target" class=" site-header-nav-item hvr-underline-from-center" title="Github">Github</a>
+        
+              
+              <a href="http://book.turtletl.com" target="target" class=" site-header-nav-item hvr-underline-from-center" title="Gitbook">Gitbook</a>
+        
+              
+              <a href="/bookmark/"  class=" site-header-nav-item hvr-underline-from-center" title="Bookmark">Bookmark</a>
+        
+              
+              <a href="/open-source/"  class=" site-header-nav-item hvr-underline-from-center" title="Opensource">Opensource</a>
+        
+              
+              <a href="/about/"  class=" site-header-nav-item hvr-underline-from-center" title="About">About</a>
+        
+      </nav>
+  </div>
+</header>
+
+	
+    <section class="collection-head geopattern" data-pattern-id="在Laravel5.2中使用dingo+JWT+Swagger" >
+
+    <div class="container">
+        <div class="collection-title">
+            <h1 class="collection-header">在Laravel5.2中使用dingo+JWT+Swagger</h1>
+            <div class="collection-info">
+             
+                <span class="meta-info">
+                    
+                            <span class="octicon octicon-calendar"></span>
+                            <time datetime="2016-10-20T06:26:34.000Z" itemprop="datePublished">2016-10-20</time>
+                    
+                </span>
+             
+            </div>
+        </div>
+    </div>
+</section>
+	
+
+    <section class="container">
+
+    <div class="columns">
+        <div class="column three-fourths" >
+            <article class="article-content article-entry">
+                <h1 id="项目github地址laravel-dingo"><a href="#项目github地址laravel-dingo" class="headerlink" title="项目github地址laravel-dingo"></a>项目github地址<a href="https://github.com/turtleliangzi/laravel-dingo" target="_blank" rel="external">laravel-dingo</a></h1><blockquote>
+<p>结合dingo api、JWT、swagger等众多目前流行的restful api工具，致力于将laravel5.2打造成更加适合API开发者开发API的工作环境，<br>并将路由分割到各个控制器中，避免众多路由混杂到一个routes.php文件中，便于日常维护! </p>
+</blockquote>
+<a id="more"></a>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><blockquote>
+<p>Note:在使用该框架之前，先要搭建好web服务器环境，本框架在nginx+php+mysql环境下能测试通过！</p>
+</blockquote>
+<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p><code>git clone https://github.com/turtleliangzi/laravel-dingo.git</code></p>
+<p>修改目录权限</p>
+<p><code>chmod -R 777 storage</code></p>
+<p><code>chmod -R bootstrap/cache</code></p>
+<h4 id="测试数据准备"><a href="#测试数据准备" class="headerlink" title="测试数据准备"></a>测试数据准备</h4><p>本框架使用的数据库、用户名、密码分别为ucenter、root、ucenter，用户可以在.env文件中修改为自己的数据库、用户名和密码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">DB_DATABASE=ucenter</div><div class="line">DB_USERNAME=root</div><div class="line">DB_PASSWORD=ucenter</div></pre></td></tr></table></figure>
+<p>生成测试表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan migrate</div></pre></td></tr></table></figure>
+<p>生成users表测试数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan tinker</div></pre></td></tr></table></figure>
+<p>进入交互界面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; namespace App</div><div class="line">=&gt; null</div><div class="line">&gt;&gt;&gt; factory(User::class, 60)-&gt;create()</div></pre></td></tr></table></figure>
+<p>lessons表测试数据可以按照同样方法生成。</p>
+<h4 id="Dingo-Api"><a href="#Dingo-Api" class="headerlink" title="Dingo Api"></a>Dingo Api</h4><p>Dingo Api是一个强大的laravel API编写工具, 使用它，可以更加规范和方便地编写API，节约大量开发时间。<a href="https://github.com/dingo/api" target="_blank" rel="external">Dingo Api</a></p>
+<p><strong>配置</strong> </p>
+<p>本框架已经安装并配置好了Dingo Api，在使用过程中，你可以修改.env文件中的以下配置</p>
+<p><code>API_STANDARDS_TREE=vnd</code></p>
+<p><code>API_PREFIX=api</code></p>
+<p><code>API_VERSION=v1</code></p>
+<p><code>API_DEBUG=true</code></p>
+<p>具体配置详情，请参考<a href="https://github.com/dingo/api/wiki/Configuration" target="_blank" rel="external">dingo api configuration</a></p>
+<p><strong>使用</strong> </p>
+<p>在app/Http/routes.php文件中注册以下路由</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * Include  Routes</div><div class="line"> */</div><div class="line"></div><div class="line">$root_dir = &apos;/var/www/dingo/app/Api/&apos;;</div><div class="line">$api = app(&apos;Dingo\Api\Routing\Router&apos;);</div><div class="line"></div><div class="line">// V1</div><div class="line">require_once $root_dir.&apos;V1/routes.php&apos;;</div></pre></td></tr></table></figure>
+<p>在app目录下新建Api/V1文件夹，在V1文件夹下新建routes.php文件，写入以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$api-&gt;version(&apos;v1&apos;, function ($api) &#123;</div><div class="line">    $api-&gt;group([&apos;namespace&apos; =&gt; &apos;App\Api\V1\Controllers&apos;], function($api) &#123;</div><div class="line">        /*</div><div class="line">         * include controller routes</div><div class="line">         */</div><div class="line"></div><div class="line">        $dir = &apos;/var/www/dingo/app/Api/V1/Controllers/&apos;;</div><div class="line">      </div><div class="line">        // User Controller Routes</div><div class="line">        require_once $dir.&apos;User/routes.php&apos;;</div><div class="line">    &#125;); </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>在V1文件夹下新建Controllers文件夹，在Controllers文件夹下新建BaseController.php文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace  App\Api\V1\Controllers;</div><div class="line"></div><div class="line">use App\Http\Controllers\Controller;</div><div class="line">use Dingo\Api\Routing\Helpers;</div><div class="line"></div><div class="line">class BaseController extends Controller &#123;</div><div class="line">    use Helpers;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在Controllers文件夹下新建User文件夹，在User文件夹下新建routes.php文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * User Controller Routes</div><div class="line"> *</div><div class="line"> */</div><div class="line"></div><div class="line">$api-&gt;get(&apos;/users/all&apos;, &apos;User\UserController@show&apos;);</div></pre></td></tr></table></figure>
+<p>至此，路由注册完毕，过程中，将路由分割到了各个控制器中，目地是为了更方便维护。</p>
+<p>在User文件夹下新建UserController.php文件，继承BaseController</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Api\V1\Controllers\User;</div><div class="line"></div><div class="line">use App\Api\V1\Controllers\BaseController;</div><div class="line">use App\User;</div><div class="line">class UserController extends BaseController &#123;</div><div class="line">    public function show() &#123;</div><div class="line">        $users =  User::all();</div><div class="line">        return $users;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在浏览器打开www.example.com/api/users/all，如果能够得到想要的，则路由注册成功。</p>
+<h4 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h4><p>JWT（JSON WEB TOKEN）一种API验证方式，详情请见<a href="https://github.com/tymondesigns/jwt-auth" target="_blank" rel="external">JWT</a></p>
+<blockquote>
+<p>Note：在本框架中已经安装并配置好了JWT，可以直接使用。</p>
+</blockquote>
+<p><strong>使用</strong></p>
+<p>在app/Api/V1/Controllers下新建Auth文件夹，在Auth文件夹下面新建AuthController.php文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Api\V1\Controllers\Auth;</div><div class="line"></div><div class="line">use App\Api\V1\Controllers\BaseController;</div><div class="line">use Illuminate\Http\Request;</div><div class="line">use JWTAuth;</div><div class="line">use Tymon\JWTAuth\Exceptions\JWTException;</div><div class="line">use App\User;</div><div class="line"></div><div class="line">class AuthController extends BaseController &#123;</div><div class="line">    public function authenticate(Request $request) &#123;</div><div class="line">        // grab credentials from the request</div><div class="line">        $credentials = $request-&gt;only(&apos;email&apos;, &apos;password&apos;);</div><div class="line"></div><div class="line">        try &#123;</div><div class="line">            // attempt to verify the credentials and create a token for the user</div><div class="line">            if (! $token = JWTAuth::attempt($credentials)) &#123;</div><div class="line">                return response()-&gt;json([&apos;error&apos; =&gt; &apos;invalid_credentials&apos;], 401);</div><div class="line">            &#125;</div><div class="line">        &#125; catch (JWTException $e) &#123;</div><div class="line">            // something went wrong whilst attempting to encode the token</div><div class="line">            return response()-&gt;json([&apos;error&apos; =&gt; &apos;could_not_create_token&apos;], 500);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // all good so return the token</div><div class="line">        return response()-&gt;json(compact(&apos;token&apos;));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注册路由，在Auth文件夹下新建routes.php文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * Auth Controller Routes</div><div class="line"> *</div><div class="line"> */</div><div class="line"></div><div class="line">$api-&gt;post(&apos;/auth/login&apos;, &apos;Auth\AuthController@authenticate&apos;);</div></pre></td></tr></table></figure>
+<p>修改app/Api/V1/routes.php文件，引入Auth/routes.php文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$api-&gt;version(&apos;v1&apos;, function ($api) &#123;</div><div class="line">    $api-&gt;group([&apos;namespace&apos; =&gt; &apos;App\Api\V1\Controllers&apos;], function($api) &#123;</div><div class="line">        /*</div><div class="line">         * include controller routes</div><div class="line">         */</div><div class="line"></div><div class="line">        $dir = &apos;/var/www/dingo/app/Api/V1/Controllers/&apos;;</div><div class="line">        // Auth Controller Rotues</div><div class="line">        require_once $dir.&apos;Auth/routes.php&apos;;</div><div class="line"></div><div class="line">        // User Controller Routes</div><div class="line">        require_once $dir.&apos;User/routes.php&apos;;</div><div class="line">    &#125;); </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>访问链接www.example.com/api/auth/login，登陆成功可以返回一串token值。可以结合register方法，先注册一个测试用户。</p>
+<p>在AuthController.php中加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public function register(Request $request) &#123;</div><div class="line"></div><div class="line">        $newUser = [ </div><div class="line">            &apos;name&apos; =&gt; $request-&gt;get(&apos;name&apos;),</div><div class="line">            &apos;email&apos; =&gt; $request-&gt;get(&apos;email&apos;),</div><div class="line">            &apos;password&apos; =&gt; bcrypt($request-&gt;get(&apos;password&apos;)),</div><div class="line">        ];</div><div class="line">        $user = User::create($newUser);</div><div class="line">        $token = JWTAuth::fromUser($user);</div><div class="line"></div><div class="line">        return response()-&gt;json(compact(&apos;token&apos;));</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>修改该目录下的routes.php，注册/auth/register路由</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$api-&gt;post(&apos;/auth/login&apos;, &apos;Auth\AuthController@authenticate&apos;);</div><div class="line">$api-&gt;post(&apos;/auth/register&apos;, &apos;Auth\AuthController@register&apos;);</div></pre></td></tr></table></figure>
+<p>可以在一个路由或路由组中使用jwt.auth中间件，通过token来验证获取资源的权限。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$api-&gt;group([&apos;middleware&apos; =&gt; &apos;jwt.auth&apos;], function($api) &#123;</div><div class="line">            $dir = &apos;/var/www/dingo/app/Api/V1/Controllers/&apos;;</div><div class="line">            // User Controller Routes</div><div class="line">            require_once $dir.&apos;User/routes.php&apos;;</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>当访问www.example.com/api/user/all时，需要在加上Header Authorization: Bearer {yourtokenhere}。</p>
+<h4 id="Swagger"><a href="#Swagger" class="headerlink" title="Swagger"></a>Swagger</h4><p>Swagger是一个非常强大的API文档工具， 在Laravel中使用Swagger可以自动生成Api文档，详情请见<a href="https://github.com/slampenny/Swaggervel" target="_blank" rel="external">swaggervel</a></p>
+<blockquote>
+<p>Note：本框架中已经安装并配置好了swagger，可以直接使用。</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line">use Swagger\Annotations as SWG;</div><div class="line"></div><div class="line">/**</div><div class="line"> * @SWG\Swagger(</div><div class="line"> *   @SWG\Info(</div><div class="line"> *     title=&quot;Dingo Api&quot;,</div><div class="line"> *     version=&quot;1.0.0&quot;</div><div class="line"> *   ),</div><div class="line"> *   @SWG\Tag(name=&quot;Auth&quot;, description=&quot;验证模块&quot;),</div><div class="line"> *   @SWG\Tag(name=&quot;Users&quot;, description=&quot;用户模块&quot;),</div><div class="line"> *   @SWG\Tag(name=&quot;Lessons&quot;, description=&quot;教程模块&quot;),</div><div class="line"> *   schemes=&#123;&quot;http&quot;&#125;,</div><div class="line"> *   host=&quot;ucenter.turtletl.com:81&quot;,</div><div class="line"> *   basePath=&quot;/api&quot;</div><div class="line"> * )</div><div class="line"> */</div><div class="line"></div><div class="line">class UserController extends BaseController &#123;</div><div class="line">    /** </div><div class="line">     * @SWG\Get(</div><div class="line">     *   path=&quot;/users/all&quot;,</div><div class="line">     *   summary=&quot;显示所有用户&quot;,</div><div class="line">     *   tags=&#123;&quot;Users&quot;&#125;,</div><div class="line">     *   @SWG\Parameter(name=&quot;Authorization&quot;, in=&quot;header&quot;, required=true, description=&quot;用户凭证&quot;, type=&quot;string&quot;),</div><div class="line">     *   @SWG\Response(</div><div class="line">     *     response=200,</div><div class="line">     *     description=&quot;all users&quot;</div><div class="line">     *   ),</div><div class="line">     *   @SWG\Response(</div><div class="line">     *     response=&quot;default&quot;,</div><div class="line">     *     description=&quot;an &quot;&quot;unexpected&quot;&quot; error&quot;</div><div class="line">     *   )</div><div class="line">     * )</div><div class="line">     */</div><div class="line">     public function show() &#123;</div><div class="line">        $users =  User::all();</div><div class="line">        $users = User::paginate(25);</div><div class="line">        return $this-&gt;response-&gt;paginator($users, new UserTransformer)-&gt;setStatusCode(200);</div><div class="line">        //return $this-&gt;response-&gt;collection($users, new UserTransformer);</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * @SWG\Get(</div><div class="line">     *   path=&quot;/users/one&quot;,</div><div class="line">     *   summary=&quot;获取当前用户&quot;,</div><div class="line">     *   tags=&#123;&quot;Users&quot;&#125;,</div><div class="line">     *   @SWG\Parameter(name=&quot;Authorization&quot;, in=&quot;header&quot;, required=true, description=&quot;用户凭证&quot;, type=&quot;string&quot;),</div><div class="line">     *   @SWG\Response(</div><div class="line">     *     response=200,</div><div class="line">     *     description=&quot;one user&quot;</div><div class="line">     *   ),</div><div class="line">     *   @SWG\Response(</div><div class="line">     *     response=&quot;default&quot;,</div><div class="line">     *     description=&quot;an &quot;&quot;unexpected&quot;&quot; error&quot;</div><div class="line">     *   )</div><div class="line">     * )</div><div class="line">     */</div><div class="line">     public function getAuthenticatedUser()</div><div class="line">    &#123;</div><div class="line">        try &#123;</div><div class="line"></div><div class="line">            if (! $user = JWTAuth::parseToken()-&gt;authenticate()) &#123;</div><div class="line">                return response()-&gt;json([&apos;user_not_found&apos;], 404);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125; catch (TokenExpiredException $e) &#123;</div><div class="line"></div><div class="line">            return response()-&gt;json([&apos;token_expired&apos;], $e-&gt;getStatusCode());</div><div class="line"></div><div class="line">        &#125; catch (TokenInvalidException $e) &#123;</div><div class="line"></div><div class="line">            return response()-&gt;json([&apos;token_invalid&apos;], $e-&gt;getStatusCode());</div><div class="line"></div><div class="line">        &#125; catch (JWTException $e) &#123;</div><div class="line"></div><div class="line">            return response()-&gt;json([&apos;token_absent&apos;], $e-&gt;getStatusCode());</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // the token is valid and we have found the user via the sub claim</div><div class="line">        return response()-&gt;json(compact(&apos;user&apos;));</div><div class="line">        //return $this-&gt;response-&gt;item(compact(&apos;user&apos;), new UserTransformer);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>Swagger-php 2.0 较Swagger-php 1.0版本有一定的改动，详情请见<a href="https://github.com/zircote/swagger-php/tree/master/docs" target="_blank" rel="external">swagger-php2.0</a></p>
+<p>访问www.example.com/api-docs查看API文档</p>
+<p>访问www.example.com/docs查看JSON文档</p>
+<p>详情请参考本框架测试环境下的API文档<a href="http://ucenter.turtletl.com:81/api-docs" target="_blank" rel="external">laravel-dingo</a>}</p>
+
+            </article>
+            
+                <div class="share">
+                    <!--开启分享-->
+<div class="share-component"></div>
+
+<script src="/js/share.min.js"></script>
+                </div>    
+            
+            
+                <div class="comments">
+                    
+                        
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    /**
+    * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+
+    s.src = '//yumemor.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+                    
+
+                </div>
+            
+        </div>
+        <div class="column one-fourth">
+            
+                <h3>Post Directory</h3>
+
+<div id="post-directory-module">
+	<section class="post-directory">
+		<p><strong class="toc-title">文章目录</strong></p>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目github地址laravel-dingo"><span class="toc-text">项目github地址laravel-dingo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载"><span class="toc-text">下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#测试数据准备"><span class="toc-text">测试数据准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Dingo-Api"><span class="toc-text">Dingo Api</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JWT"><span class="toc-text">JWT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Swagger"><span class="toc-text">Swagger</span></a></li></ol></li></ol></li></ol></li></ol>
+	</section>
+</div>
+            
+        </div>
+       
+    </div>
+</section>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+                © 2016
+                <span title="yumemor">yumemor</span>
+                <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+            </li>
+        </ul>
+
+        <a href="https://github.com/turtleliangzi/turtleliangzi.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+        </a>
+
+        <ul class="site-footer-links mobile-hidden">
+            
+             
+              
+              <li>
+                <a href="/"  title="Home">Home</a>
+              </li>
+            
+              
+              <li>
+                <a href="https://github.com/turtleliangzi" target="target" title="Github">Github</a>
+              </li>
+            
+              
+              <li>
+                <a href="http://book.turtletl.com" target="target" title="Gitbook">Gitbook</a>
+              </li>
+            
+              
+              <li>
+                <a href="/bookmark/"  title="Bookmark">Bookmark</a>
+              </li>
+            
+              
+              <li>
+                <a href="/open-source/"  title="Opensource">Opensource</a>
+              </li>
+            
+              
+              <li>
+                <a href="/about/"  title="About">About</a>
+              </li>
+            
+
+        </ul>
+
+    </div>
+</footer>
+
+		
+		<script src="/js/typer.js"></script>
+
+		<script src="/js/geopattern.js"></script>
+
+		<script src="/js/index.js"></script>
+
+		 <script src="/js/popular_repo.js"></script> 
+
+	</body>
+</html>

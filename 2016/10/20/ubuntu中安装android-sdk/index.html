@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+<head>
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Turtle</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <!--在这里倒入jquery 方便处理部分页面的jquery-->
+  <script src="http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+	
+  <header class="site-header navfixed-false">
+
+  <div class="container">
+      <h1><a href="/" title="Turtle"><span class="octicon octicon-mark-github"></span> Turtle</a></h1>
+      <nav class="site-header-nav" role="navigation">
+        
+              
+              <a href="/"  class=" site-header-nav-item hvr-underline-from-center" title="Home">Home</a>
+        
+              
+              <a href="https://github.com/turtleliangzi" target="target" class=" site-header-nav-item hvr-underline-from-center" title="Github">Github</a>
+        
+              
+              <a href="http://book.turtletl.com" target="target" class=" site-header-nav-item hvr-underline-from-center" title="Gitbook">Gitbook</a>
+        
+              
+              <a href="/bookmark/"  class=" site-header-nav-item hvr-underline-from-center" title="Bookmark">Bookmark</a>
+        
+              
+              <a href="/open-source/"  class=" site-header-nav-item hvr-underline-from-center" title="Opensource">Opensource</a>
+        
+              
+              <a href="/about/"  class=" site-header-nav-item hvr-underline-from-center" title="About">About</a>
+        
+      </nav>
+  </div>
+</header>
+
+	
+    <section class="collection-head geopattern" data-pattern-id="ubuntu中安装android sdk" >
+
+    <div class="container">
+        <div class="collection-title">
+            <h1 class="collection-header">ubuntu中安装android sdk</h1>
+            <div class="collection-info">
+             
+                <span class="meta-info">
+                    
+                            <span class="octicon octicon-calendar"></span>
+                            <time datetime="2016-10-20T06:32:58.000Z" itemprop="datePublished">2016-10-20</time>
+                    
+                </span>
+             
+            </div>
+        </div>
+    </div>
+</section>
+	
+
+    <section class="container">
+
+    <div class="columns">
+        <div class="column three-fourths" >
+            <article class="article-content article-entry">
+                <blockquote>
+<p>本文阐述的是如何在ubuntu中安装android sdk 环境<br><a id="more"></a></p>
+</blockquote>
+<h2 id="一、安装python-software-properties"><a href="#一、安装python-software-properties" class="headerlink" title="一、安装python-software-properties"></a>一、安装python-software-properties</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get update &amp;&amp; apt-get install -y -q python-software-properties software-properties-common &amp;&amp; apt-get clean</div></pre></td></tr></table></figure>
+<h2 id="二、安装oracle-java-from-PPA"><a href="#二、安装oracle-java-from-PPA" class="headerlink" title="二、安装oracle java from PPA"></a>二、安装oracle java from PPA</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">add-apt-repository ppa:webupd8team/java -y</div><div class="line"></div><div class="line">echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections</div><div class="line"></div><div class="line">apt-get update &amp;&amp; apt-get -y install oracle-java7-installer &amp;&amp; apt-get clean</div></pre></td></tr></table></figure>
+<h2 id="三、ANDROID-STUFF"><a href="#三、ANDROID-STUFF" class="headerlink" title="三、ANDROID STUFF"></a>三、ANDROID STUFF</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dpkg --add-architecture i386 &amp;&amp; apt-get update &amp;&amp; apt-get install -y --force-yes expect ant wget libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1 qemu-kvm kmod &amp;&amp; apt-get clean</div></pre></td></tr></table></figure>
+<h2 id="四、安装Android-SDK"><a href="#四、安装Android-SDK" class="headerlink" title="四、安装Android SDK"></a>四、安装Android SDK</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /opt &amp;&amp; wget --output-document=android-sdk.tgz --quiet http://dl.google.com/android/android-sdk_r24.0.2-linux.tgz &amp;&amp; tar xzf android-sdk.tgz &amp;&amp; rm -f android-sdk.tgz</div></pre></td></tr></table></figure>
+<h2 id="五、配置环境"><a href="#五、配置环境" class="headerlink" title="五、配置环境"></a>五、配置环境</h2><p>在/etc/profile文件末尾加上如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export ANDROID_HOME=/opt/android-sdk-linux</div><div class="line">export PATH=$&#123;PATH&#125;:$&#123;ANDROID_HOME&#125;/tools:$&#123;ANDROID_HOME&#125;/platform-tools</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/profile</div></pre></td></tr></table></figure>
+<h2 id="六、安装sdk-elements"><a href="#六、安装sdk-elements" class="headerlink" title="六、安装sdk elements"></a>六、安装sdk elements</h2><p>新建脚本/opt/tools/android-accept-licenses.sh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/expect -f</div><div class="line"></div><div class="line">set timeout 1800</div><div class="line">set cmd [lindex $argv 0]</div><div class="line">set licenses [lindex $argv 1]</div><div class="line"></div><div class="line">spawn &#123;*&#125;$cmd</div><div class="line">expect &#123;</div><div class="line">&quot;Do you accept the license &apos;*&apos;*&quot; &#123;</div><div class="line">    exp_send &quot;y\r&quot;</div><div class="line">    exp_continue</div><div class="line">&#125;</div><div class="line">eof</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod 755 /opt/tools/android-accept-licenses.sh</div></pre></td></tr></table></figure>
+<p>在/etc/profile文件末尾加上如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=$PATH:/opt/tools</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo ANDROID_HOME=&quot;$&#123;ANDROID_HOME&#125;&quot; &gt;&gt; /etc/environment</div></pre></td></tr></table></figure>
+<p>运行脚本并更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/tools/android-accept-licenses.sh</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android update sdk --all --no-ui --filter platform-tools,tools,build-tools23,android-23,addon-google_apis_x86-google-23,extra-android-support,extra-android-m2repository,extra-google-m2repository,sys-img-x86-android-23 --proxy-host mirrors.neusoft.edu.cn --proxy-port 80 -s</div></pre></td></tr></table></figure>
+
+            </article>
+            
+                <div class="share">
+                    <!--开启分享-->
+<div class="share-component"></div>
+
+<script src="/js/share.min.js"></script>
+                </div>    
+            
+            
+                <div class="comments">
+                    
+                        
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    /**
+    * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+
+    s.src = '//yumemor.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+                    
+
+                </div>
+            
+        </div>
+        <div class="column one-fourth">
+            
+                <h3>Post Directory</h3>
+
+<div id="post-directory-module">
+	<section class="post-directory">
+		<p><strong class="toc-title">文章目录</strong></p>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、安装python-software-properties"><span class="toc-text">一、安装python-software-properties</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、安装oracle-java-from-PPA"><span class="toc-text">二、安装oracle java from PPA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、ANDROID-STUFF"><span class="toc-text">三、ANDROID STUFF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、安装Android-SDK"><span class="toc-text">四、安装Android SDK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、配置环境"><span class="toc-text">五、配置环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、安装sdk-elements"><span class="toc-text">六、安装sdk elements</span></a></li></ol>
+	</section>
+</div>
+            
+        </div>
+       
+    </div>
+</section>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+                © 2016
+                <span title="yumemor">yumemor</span>
+                <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+            </li>
+        </ul>
+
+        <a href="https://github.com/turtleliangzi/turtleliangzi.github.io" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+        </a>
+
+        <ul class="site-footer-links mobile-hidden">
+            
+             
+              
+              <li>
+                <a href="/"  title="Home">Home</a>
+              </li>
+            
+              
+              <li>
+                <a href="https://github.com/turtleliangzi" target="target" title="Github">Github</a>
+              </li>
+            
+              
+              <li>
+                <a href="http://book.turtletl.com" target="target" title="Gitbook">Gitbook</a>
+              </li>
+            
+              
+              <li>
+                <a href="/bookmark/"  title="Bookmark">Bookmark</a>
+              </li>
+            
+              
+              <li>
+                <a href="/open-source/"  title="Opensource">Opensource</a>
+              </li>
+            
+              
+              <li>
+                <a href="/about/"  title="About">About</a>
+              </li>
+            
+
+        </ul>
+
+    </div>
+</footer>
+
+		
+		<script src="/js/typer.js"></script>
+
+		<script src="/js/geopattern.js"></script>
+
+		<script src="/js/index.js"></script>
+
+		 <script src="/js/popular_repo.js"></script> 
+
+	</body>
+</html>
